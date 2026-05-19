@@ -12,7 +12,40 @@ Thank you for your interest in contributing to the GCP Project Operator! This gu
 - [Testing](#testing)
 - [Boilerplate Framework](#boilerplate-framework)
 - [Development Workflow](#development-workflow)
+## Claude Code Integration
+
+This project includes integration with [Claude Code](https://claude.ai/code), an AI-powered development tool.
+
+### Stop Hook Validation
+
+Claude Code users benefit from an automatic **stop hook** that runs `prek run --all-files` before Claude stops working. This catches validation issues early in the development cycle.
+
+If `prek` finds violations, the hook **blocks Claude from stopping** and feeds the errors back so Claude can fix them automatically. This shortens the feedback loop and ensures high-quality output without manual intervention.
+
+**Setup for Claude Code users**:
+- The stop hook is configured in [`.claude/settings.json`](.claude/settings.json)
+- The hook script is at [`.claude/hooks/stop-prek-validation.sh`](.claude/hooks/stop-prek-validation.sh)
+- Requires `jq` and `prek` to be installed (see [Prerequisites](#prerequisites))
+
+**Human developers** should follow the standard setup in this guide and rely on pre-commit hooks instead.
+
 - [Claude Code Integration](#claude-code-integration)
+## Commit Message Conventions
+
+We follow the [Conventional Commits](https://www.conventionalcommits.org/) specification for all commit messages.
+
+### AI Attribution
+
+When using AI assistants (like Claude, Gemini, or GitHub Copilot) to generate or significantly refactor code, you **MUST** include an attribution in the commit message trailer using the `Co-authored-by` format:
+
+```text
+feat(api): add new validation for GCPProject
+
+This commit adds a new validating webhook.
+
+Co-authored-by: Claude <claude@anthropic.com>
+```
+
 - [CI/CD Integration](#cicd-integration)
 - [Finding Issues to Work On](#finding-issues-to-work-on)
 - [Submitting Pull Requests](#submitting-pull-requests)
@@ -64,6 +97,21 @@ Before contributing, ensure you have the following tools installed:
   ```
 
 ## Development Environment Setup
+
+0. **Install required tools**:
+   ```bash
+   # Install golangci-lint (macOS)
+   brew install golangci-lint
+
+   # Install golangci-lint (Linux)
+   curl -sSfL https://raw.githubusercontent.com/golangci/golangci-lint/master/install.sh | sh -s -- -b $(go env GOPATH)/bin
+
+   # Install prek (macOS)
+   brew install prek
+
+   # Install prek (Linux)
+   curl -fsSL https://prek.j178.dev/install.sh | bash
+   ```
 
 1. **Fork and clone the repository**:
    ```bash
@@ -264,6 +312,23 @@ This project includes integration with [Claude Code](https://claude.ai/code), an
 
 Claude Code users benefit from an automatic **stop hook** that runs `prek run --all-files` before Claude stops working. This catches validation issues early in the development cycle.
 
+If `prek` finds violations, the hook **blocks Claude from stopping** and feeds the errors back so Claude can fix them automatically. This shortens the feedback loop and ensures high-quality output without manual intervention.
+
+**Setup for Claude Code users**:
+- The stop hook is configured in [`.claude/settings.json`](.claude/settings.json)
+- The hook script is at [`.claude/hooks/stop-prek-validation.sh`](.claude/hooks/stop-prek-validation.sh)
+- Requires `jq` and `prek` to be installed (see [Prerequisites](#prerequisites))
+
+**Human developers** should follow the standard setup in this guide and rely on pre-commit hooks instead.
+
+## Claude Code Integration
+
+This project includes integration with [Claude Code](https://claude.ai/code), an AI-powered development tool.
+
+### Stop Hook Validation
+
+Claude Code users benefit from an automatic **stop hook** that runs `prek run --all-files` before Claude stops working. This catches validation issues early in the development cycle.
+
 **How it works**:
 1. When Claude Code is about to stop, the hook runs validation
 2. If validation fails, Claude is blocked from stopping and shown the errors
@@ -276,6 +341,22 @@ Claude Code users benefit from an automatic **stop hook** that runs `prek run --
 - Requires `jq` and `prek` to be installed (see [Prerequisites](#prerequisites))
 
 **Human developers** should follow the standard setup in this guide and rely on pre-commit hooks instead.
+
+## Commit Message Conventions
+
+We follow the [Conventional Commits](https://www.conventionalcommits.org/) specification for all commit messages.
+
+### AI Attribution
+
+When using AI assistants (like Claude, Gemini, or GitHub Copilot) to generate or significantly refactor code, you **MUST** include an attribution in the commit message trailer using the `Co-authored-by` format:
+
+```text
+feat(api): add new validation for GCPProject
+
+This commit adds a new validating webhook.
+
+Co-authored-by: Claude <claude@anthropic.com>
+```
 
 ## CI/CD Integration
 
