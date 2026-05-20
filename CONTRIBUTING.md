@@ -12,24 +12,6 @@ Thank you for your interest in contributing to the GCP Project Operator! This gu
 - [Testing](#testing)
 - [Boilerplate Framework](#boilerplate-framework)
 - [Development Workflow](#development-workflow)
-## Claude Code Integration
-
-This project includes integration with [Claude Code](https://claude.ai/code), an AI-powered development tool.
-
-### Stop Hook Validation
-
-Claude Code users benefit from an automatic **stop hook** that runs `prek run --all-files` before Claude stops working. This catches validation issues early in the development cycle.
-
-If `prek` finds violations, the hook **blocks Claude from stopping** and feeds the errors back so Claude can fix them automatically. This shortens the feedback loop and ensures high-quality output without manual intervention.
-
-**Setup for Claude Code users**:
-- The stop hook is configured in [`.claude/settings.json`](.claude/settings.json)
-- The hook script is at [`.claude/hooks/stop-prek-validation.sh`](.claude/hooks/stop-prek-validation.sh)
-- Requires `jq` and `prek` to be installed (see [Prerequisites](#prerequisites))
-
-**Human developers** should follow the standard setup in this guide and rely on pre-commit hooks instead.
-
-- [Claude Code Integration](#claude-code-integration)
 ## Commit Message Conventions
 
 We follow the [Conventional Commits](https://www.conventionalcommits.org/) specification for all commit messages.
